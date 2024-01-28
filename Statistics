@@ -1,0 +1,69 @@
+function calculateMean(array) {
+    let sum = 0;
+    for (let i = 0; i < array.length; i++) {
+      sum += array[i];
+    }
+    return sum / array.length;
+  }
+
+  function findMode(array) {
+    let frequency = {};
+    let maxFrequency = 0;
+    let mode;
+
+    for (let i = 0; i < array.length; i++) {
+      let num = array[i];
+      frequency[num] = (frequency[num] || 0) + 1;
+
+      if (frequency[num] > maxFrequency) {
+        maxFrequency = frequency[num];
+        mode = num;
+      }
+    }
+
+    return mode;
+  }
+
+  function findMedian(array) {
+    let sortedArray = [...array].sort((a, b) => a - b);
+    let middleIndex = Math.floor(sortedArray.length / 2);
+
+    if (sortedArray.length % 2 === 0) {
+      return (sortedArray[middleIndex - 1] + sortedArray[middleIndex]) / 2;
+    } else {
+      return sortedArray[middleIndex];
+    }
+
+  }
+
+  function findVariance(array) {
+    let mean = array.reduce((sum, num) => sum + num, 0) / array.length;
+    let variance = 0;
+
+    for (let i = 0; i < array.length; i++) {
+      variance += Math.pow(array[i] - mean, 2);
+    }
+
+    variance /= array.length;
+    return variance;
+  }
+
+  function findRange(array) {
+    let min = Math.min(...array);
+    let max = Math.max(...array);
+    return max - min;
+  }
+
+  function findStandardDeviation(array) {
+    let variance = findVariance(array);
+    return Math.sqrt(variance);
+  }
+  // I do not know how to complete the remaining two functions so i stopped here
+
+  let array = [1, 2, 2, 3, 4, 4, 4, 5];
+console.log(calculateMean(array)); // Output: 3.125
+console.log(findMode(array)); // Output: 4
+console.log(findMedian(array)); // Output: 3.5
+console.log(findVariance(array)); // Output: 1.6
+console.log(findRange(array)); // Output: 4
+console.log(findStandardDeviation(array)); // Output: 1.2686
